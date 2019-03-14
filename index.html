@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <title>Frontend test</title>
+  </head>
+  <body>
+    <header>
+      
+    </header>
+    <div class="frame card_offset">
+      <div class="card">
+        <div class="details">
+          <div class="user_photo horizontal_center">
+            <img id="avatar" src="" />
+          </div>
+          <p id="user_title">Hi, my name is</p>
+          <p id="user_value"></p>
+        </div>
+        <ul class="values_list horizontal_center" id="values_list">
+          <li><img id="name" src="./assets/icons/svg/misc/user.svg"></a></li>
+          <li><img id="email" src="./assets/icons/svg/misc/email.svg"></a></li>
+          <li><img id="dob" src="./assets/icons/svg/misc/calendar.svg"></a></li>
+          <li><img id="address" src="./assets/icons/svg/misc/map-location.svg"></a></li>
+          <li><img id="phone" src="./assets/icons/svg/misc/call.svg"></a></li>
+          <li><img id="password" src="./assets/icons/svg/misc/locked.svg"></a></li>
+        </ul>
+      </div>
+    </div>
+    <script>
+        $.ajax({
+            url: 'https://randomuser.me/api/',
+            dataType: 'json',
+            success: function(data) {
+                
+                const results = data.results[0]
+
+                const avatar = results.picture.large
+                const name = results.name.first
+                const email = results.email
+                const dob = moment(results.dob.date).format('l')
+                const address = results.location.street
+                const phone = results.phone
+                const password = results.login.password
+
+                $("#user_value").html(name)
+                $("#avatar").attr('src', avatar)
+                
+                $('#name').mouseover(()=>{
+                    $("#user_value").html(name)
+                    $("#user_title").html("Hi, my name is")
+                })
+
+                $('#email').mouseover(()=>{
+                    $("#user_value").html(email)
+                    $("#user_title").html("My email address is")
+                })
+
+                $('#dob').mouseover(()=>{
+                    $("#user_value").html(dob)
+                    $("#user_title").html("My birthday is")
+                })
+
+                $('#address').mouseover(()=>{
+                    $("#user_value").html(address)
+                    $("#user_title").html("My address is")
+                })
+
+                $('#phone').mouseover(()=>{
+                    $("#user_value").html(phone)
+                    $("#user_title").html("My number is")
+                })
+
+                $('#password').mouseover(()=>{
+                    $("#user_value").html(password)
+                    $("#user_title").html("My password is")
+                })
+                
+            }
+            });
+
+            
+    </script>
+  </body>
+</html>
